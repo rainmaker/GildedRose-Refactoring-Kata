@@ -4,6 +4,12 @@ class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
+
+  incrementQuality() {
+    if (this.quality < 50) {
+      this.quality += 1
+    }
+  }
 }
 
 class Shop {
@@ -11,15 +17,8 @@ class Shop {
     this.items = items;
   }
 
-  incrementQuality(item) {
-    if (item.quality < 50) {
-      item.quality += 1
-    }
-  }
-
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-
       let item = this.items[i];
 
       if (item.name == 'Sulfuras, Hand of Ragnaros') {
@@ -31,13 +30,13 @@ class Shop {
           item.quality = this.items[i].quality - 1;
         }
       } else {
-        this.incrementQuality(item);
+        item.incrementQuality();
         if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
           if (item.sellIn < 11) {
-            this.incrementQuality(item);
+            item.incrementQuality();
           }
           if (item.sellIn < 6) {
-            this.incrementQuality(item);
+            item.incrementQuality();
           }
         }
       }
@@ -53,7 +52,7 @@ class Shop {
             item.quality = this.items[i].quality - this.items[i].quality;
           }
         } else {
-          this.incrementQuality(item);
+          item.incrementQuality();
         }
       }
     }
