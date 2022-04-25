@@ -31,33 +31,45 @@ class Shop {
         continue;
       }
 
-      item.sellIn = this.items[i].sellIn - 1;
+      item.sellIn = item.sellIn - 1;
 
       if (item.name == 'Aged Brie') {
-        item.incrementQuality();
-        if (item.sellIn < 0) {
-          item.incrementQuality();
-        }
+        this.updateAgedBrie(item);
       } else if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
-        item.incrementQuality();
-        if (item.sellIn < 11) {
-          item.incrementQuality();
-        }
-        if (item.sellIn < 6) {
-          item.incrementQuality();
-        }
-        if (item.sellIn < 0) {
-          item.quality = 0
-        }
+        this.updateBackstagePass(item);
       } else {
-        item.decrementQuality();
-        if (item.sellIn < 0) {
-          item.decrementQuality();
-        }
+        this.updateRegularItem(item);
       }
     }
 
     return this.items;
+  }
+
+  updateAgedBrie(item) {
+    item.incrementQuality();
+    if (item.sellIn < 0) {
+      item.incrementQuality();
+    }
+  }
+
+  updateBackstagePass(item) {
+    item.incrementQuality();
+    if (item.sellIn < 11) {
+      item.incrementQuality();
+    }
+    if (item.sellIn < 6) {
+      item.incrementQuality();
+    }
+    if (item.sellIn < 0) {
+      item.quality = 0
+    }
+  }
+
+  updateRegularItem(item) {
+    item.decrementQuality();
+    if (item.sellIn < 0) {
+      item.decrementQuality();
+    }
   }
 }
 
