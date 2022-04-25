@@ -61,6 +61,22 @@ describe("Gilded Rose", function() {
       expect(items[0].quality).toBe(0);
     });
 
+    describe("Conjured items", function(){
+      it("should degrade twice as fast as regular items before sellIn reaches 0", function(){
+        const gildedRose = new Shop([new Item("Conjured Hat", 3, 4)]);
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toBe(2);
+      });
+
+      it("should degrade twice as fast as regular items when sellIn reaches 0", function(){
+        const gildedRose = new Shop([new Item("Conjured Hat", 0, 4)]);
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toBe(0);
+      });
+    });
+
     describe("Aged Brie", function(){
       it("should increase in value as it approaches the sell-by date", function(){
         const gildedRose = new Shop([new Item("Aged Brie", 3, 0)]);
@@ -102,7 +118,6 @@ describe("Gilded Rose", function() {
     });
 
     describe("Backstage passes", function(){
-
       it("should increase in value as it approaches the sell-by date", function(){
         const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 0)]);
         const items = gildedRose.updateQuality();

@@ -37,6 +37,8 @@ class Shop {
         this.updateAgedBrie(item);
       } else if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
         this.updateBackstagePass(item);
+      } else if (item.name.includes("Conjured") ) {
+        this.updateConjuredItem(item);
       } else {
         this.updateRegularItem(item);
       }
@@ -70,6 +72,11 @@ class Shop {
     if (item.sellIn < 0) {
       item.decrementQuality();
     }
+  }
+
+  updateConjuredItem(item) {
+    this.updateRegularItem(item);
+    this.updateRegularItem(item);
   }
 }
 
